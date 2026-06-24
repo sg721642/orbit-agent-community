@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Overview from './components/Overview';
 import Onboarding from './components/Onboarding';
 import Moderation from './components/Moderation';
@@ -6,43 +6,29 @@ import Events from './components/Events';
 import type { TabId } from './types';
 
 // ─── Tab Config ───────────────────────────────────────────────────────────
-const TABS: { id: TabId; label: string; icon: string; description: string }[] = [
-  { id: 'overview',   label: 'Overview',   icon: '🌐', description: 'Community health & metrics' },
-  { id: 'onboarding', label: 'Onboarding', icon: '🎯', description: 'Member chapter matching'   },
-  { id: 'moderation', label: 'Moderation', icon: '🛡️', description: 'HITL content review'       },
-  { id: 'events',     label: 'Events',     icon: '🗓️', description: 'Personalised recommendations' },
+const TABS: { id: TabId; label: string; description: string }[] = [
+  { id: 'overview',   label: 'Overview',   description: 'Community health & metrics' },
+  { id: 'onboarding', label: 'Onboarding', description: 'Member chapter matching'   },
+  { id: 'moderation', label: 'Moderation', description: 'HITL content review'       },
+  { id: 'events',     label: 'Events',     description: 'Personalised recommendations' },
 ];
 
 // ─── Orbit Logo ───────────────────────────────────────────────────────────
 function OrbitLogo() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="relative w-9 h-9 flex-shrink-0">
-        {/* Outer ring */}
-        <div
-          className="absolute inset-0 rounded-full border-2"
-          style={{ borderColor: 'var(--accent-primary)', opacity: 0.4, animation: 'spin 8s linear infinite' }}
-        />
-        {/* Middle ring */}
-        <div
-          className="absolute inset-1 rounded-full border-2"
-          style={{ borderColor: 'var(--accent-secondary)', opacity: 0.6, animation: 'spin 5s linear infinite reverse' }}
-        />
-        {/* Core dot */}
-        <div
-          className="absolute inset-3 rounded-full"
-          style={{ background: 'var(--accent-primary)' }}
-        />
-      </div>
+    <div className="flex items-center gap-2.5 font-display">
+      <span className="text-2xl font-bold" style={{ color: '#FF6B00' }}>
+        ◎
+      </span>
       <div>
-        <span className="text-xl font-extrabold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+        <span className="text-lg font-bold tracking-tight uppercase" style={{ color: 'var(--text-primary)' }}>
           ORBIT
         </span>
         <span
-          className="text-xs block -mt-0.5 font-medium"
-          style={{ color: 'var(--text-muted)' }}
+          className="text-[10px] block -mt-1 font-semibold uppercase tracking-widest"
+          style={{ color: 'var(--text-secondary)' }}
         >
-          Agent{'{A}'}thon 2026
+          Terminal v1.0
         </span>
       </div>
     </div>
@@ -52,18 +38,17 @@ function OrbitLogo() {
 // ─── Backend Status ───────────────────────────────────────────────────────
 function BackendStatus({ online }: { online: boolean | null }) {
   if (online === null) return (
-    <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--text-muted)' }}>
-      <div className="w-2 h-2 rounded-full bg-gray-500 animate-pulse" />
-      Checking backend…
+    <div className="flex items-center gap-1.5 text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+      <div className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-pulse" />
+      CHECKING...
     </div>
   );
   return (
-    <div className="flex items-center gap-1.5 text-xs" style={{ color: online ? '#34d399' : '#f87171' }}>
+    <div className="flex items-center gap-1.5 text-xs font-mono" style={{ color: online ? '#22C55E' : '#FF6B00' }}>
       <div
-        className={`w-2 h-2 rounded-full ${online ? 'bg-emerald-400' : 'bg-red-400'}`}
-        style={online ? { animation: 'pulse 2s ease-in-out infinite' } : {}}
+        className={`w-1.5 h-1.5 rounded-full ${online ? 'bg-green-500' : 'bg-orange-500'}`}
       />
-      {online ? 'Backend online' : 'Simulated mode'}
+      {online ? 'ONLINE' : 'OFFLINE'}
     </div>
   );
 }
@@ -78,18 +63,16 @@ function ModeToggle({
   return (
     <button
       onClick={onToggle}
-      className="flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200"
+      className="flex items-center gap-2 px-3 py-1.5 transition-all duration-200 font-display font-bold uppercase tracking-wider text-xs"
       style={{
-        background: simulated ? 'rgba(245,158,11,0.1)' : 'rgba(16,185,129,0.1)',
-        border: `1px solid ${simulated ? 'rgba(245,158,11,0.3)' : 'rgba(16,185,129,0.3)'}`,
-        color: simulated ? '#fbbf24' : '#34d399',
+        background: simulated ? 'rgba(255,107,0,0.1)' : 'rgba(34,197,94,0.1)',
+        border: `1px solid ${simulated ? 'rgba(255,107,0,0.2)' : 'rgba(34,197,94,0.2)'}`,
+        color: simulated ? '#FF6B00' : '#22C55E',
+        borderRadius: '6px',
       }}
       title={simulated ? 'Switch to live backend' : 'Switch to simulated mode'}
     >
-      <span className="text-sm">{simulated ? '⚡' : '🌐'}</span>
-      <span className="text-xs font-semibold hidden sm:block">
-        {simulated ? 'Simulated' : 'Live'}
-      </span>
+      <span>{simulated ? 'SIMULATED' : 'LIVE'}</span>
     </button>
   );
 }
@@ -98,7 +81,7 @@ function ModeToggle({
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('overview');
   const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
-  const [simulated, setSimulated] = useState(true); // default simulated until backend confirmed
+  const [simulated, setSimulated] = useState(true);
 
   useEffect(() => {
     const check = async () => {
@@ -122,43 +105,36 @@ export default function App() {
       <nav
         className="sticky top-0 z-50 px-4 sm:px-6"
         style={{
-          background: 'rgba(8,11,20,0.85)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          background: '#0D0D0B',
+          borderBottom: '1px solid #2A2A28',
         }}
       >
-        <div className="max-w-7xl mx-auto flex items-center gap-4 h-16">
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
           {/* Logo */}
           <OrbitLogo />
 
-          {/* Tab Pills */}
-          <div className="flex-1 flex items-center gap-1 overflow-x-auto ml-4 py-1">
+          {/* Tab Underline Links */}
+          <div className="flex-1 flex items-center justify-center gap-6 h-full overflow-x-auto px-4">
             {TABS.map(tab => (
               <button
                 key={tab.id}
                 id={`tab-${tab.id}`}
                 onClick={() => setActiveTab(tab.id)}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 whitespace-nowrap flex-shrink-0"
+                className="flex items-center h-16 px-1 border-b-2 transition-all duration-150 whitespace-nowrap flex-shrink-0 font-display text-xs tracking-widest uppercase font-bold"
                 style={{
-                  background: activeTab === tab.id
-                    ? 'rgba(99,102,241,0.15)'
-                    : 'transparent',
-                  border: activeTab === tab.id
-                    ? '1px solid rgba(99,102,241,0.3)'
-                    : '1px solid transparent',
-                  color: activeTab === tab.id
-                    ? 'var(--text-primary)'
-                    : 'var(--text-muted)',
+                  background: 'transparent',
+                  borderColor: activeTab === tab.id ? '#FF6B00' : 'transparent',
+                  color: activeTab === tab.id ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  borderRadius: '0px',
                 }}
               >
-                <span>{tab.icon}</span>
-                <span className="text-sm font-medium">{tab.label}</span>
+                {tab.label}
               </button>
             ))}
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-4 flex-shrink-0">
             <BackendStatus online={backendOnline} />
             <ModeToggle
               simulated={simulated}
@@ -171,17 +147,14 @@ export default function App() {
       {/* ─── Banner if simulated ─── */}
       {simulated && (
         <div
-          className="px-4 sm:px-6 py-2.5 text-center text-sm"
+          className="px-4 sm:px-6 py-2.5 text-center text-xs font-mono uppercase tracking-wider"
           style={{
-            background: 'rgba(245,158,11,0.08)',
-            borderBottom: '1px solid rgba(245,158,11,0.15)',
-            color: '#fbbf24',
+            background: 'rgba(255,107,0,0.08)',
+            borderBottom: '1px solid rgba(255,107,0,0.15)',
+            color: '#FF6B00',
           }}
         >
-          ⚡ Running in <strong>Simulated Mode</strong> — backend offline.{' '}
-          <span style={{ color: 'var(--text-secondary)' }}>
-            Start the Python agents and refresh, or click the mode toggle to switch.
-          </span>
+          ▲ Simulated Mode Enabled — Python Backend Offline. All operations are local sandboxes.
         </div>
       )}
 
@@ -195,17 +168,17 @@ export default function App() {
 
       {/* ─── Footer ─── */}
       <footer
-        className="mt-16 px-6 py-6 text-center text-sm"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.05)', color: 'var(--text-muted)' }}
+        className="mt-16 border-t px-6 py-8 bg-[#0D0D0B]"
+        style={{ borderColor: '#2A2A28', color: 'var(--text-secondary)' }}
       >
-        <div className="flex items-center justify-center gap-2 mb-1">
-          <span>ORBIT</span>
-          <span style={{ color: 'rgba(255,255,255,0.1)' }}>·</span>
-          <span>Built for Agent{'{A}'}thon 2026</span>
-          <span style={{ color: 'rgba(255,255,255,0.1)' }}>·</span>
-          <span>Powered by AgentField + Google Gemini</span>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono">
+          <div className="text-center md:text-left">
+            Built for Agent{'{A}'}thon 2026 · Autonomous Operations for India's Tech Communities
+          </div>
+          <div className="text-center md:text-right">
+            AgentField · Gemini · React
+          </div>
         </div>
-        <p>Multi-agent community operations platform · 4 AI Agents · Human-in-the-Loop · Verifiable Credentials</p>
       </footer>
     </div>
   );

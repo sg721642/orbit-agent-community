@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MOCK_MEMBERS, MOCK_EVENTS } from '../mockData';
 import { recommendEvents } from '../api';
 import type { Member, Event } from '../types';
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Workshop: '#6366f1',
-  Meetup: '#10b981',
-  Conference: '#f59e0b',
-  Hackathon: '#ec4899',
-  Webinar: '#06b6d4',
+  Workshop: '#FF6B00',
+  Meetup: '#22C55E',
+  Conference: '#A09880',
+  Hackathon: '#FF6B00',
+  Webinar: '#F5F0E8',
 };
 
 // ─── Event Card ───────────────────────────────────────────────────────────
 function EventCard({ event, index }: { event: Event; index: number }) {
-  const color = CATEGORY_COLORS[event.category] || '#6366f1';
+  const color = CATEGORY_COLORS[event.category] || '#FF6B00';
   const matchPct = event.matchScore ? Math.round(event.matchScore * 100) : null;
 
   return (
@@ -23,32 +23,32 @@ function EventCard({ event, index }: { event: Event; index: number }) {
     >
       <div className="flex items-start justify-between mb-3">
         <span
-          className="text-xs font-semibold px-2.5 py-1 rounded-full"
-          style={{ background: `${color}22`, color }}
+          className="text-xs font-semibold px-2.5 py-1 rounded"
+          style={{ background: 'rgba(255,107,0,0.1)', color: '#FF6B00', border: '1px solid rgba(255,107,0,0.2)' }}
         >
           {event.category}
         </span>
         {matchPct && (
-          <div className="flex items-center gap-1.5">
-            <div className="w-2 h-2 rounded-full" style={{ background: color }} />
-            <span className="text-sm font-bold" style={{ color }}>
-              {matchPct}% match
+          <div className="flex items-center gap-1.5 font-mono">
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: color }} />
+            <span className="text-xs font-bold" style={{ color }}>
+              {matchPct}% MATCH
             </span>
           </div>
         )}
       </div>
 
-      <h3 className="font-semibold text-base leading-snug mb-2" style={{ color: 'var(--text-primary)' }}>
+      <h3 className="font-bold font-display text-base leading-snug mb-2" style={{ color: 'var(--text-primary)' }}>
         {event.title}
       </h3>
 
       {event.matchReason && (
-        <p className="text-xs mb-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+        <p className="text-xs mb-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
           {event.matchReason}
         </p>
       )}
 
-      <div className="flex flex-wrap items-center gap-3 text-xs" style={{ color: 'var(--text-muted)' }}>
+      <div className="flex flex-wrap items-center gap-3 text-xs font-mono border-t border-[#2A2A28] pt-3" style={{ color: 'var(--text-secondary)' }}>
         <span>📅 {new Date(event.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
         <span>📍 {event.venue || event.chapter}</span>
         {event.speaker && <span>🎤 {event.speaker}</span>}
@@ -56,10 +56,10 @@ function EventCard({ event, index }: { event: Event; index: number }) {
 
       {matchPct && (
         <div className="mt-3">
-          <div className="progress-bar" style={{ height: '4px' }}>
+          <div className="progress-bar">
             <div
               className="progress-fill"
-              style={{ width: `${matchPct}%`, background: `linear-gradient(90deg, ${color}, ${color}88)` }}
+              style={{ width: `${matchPct}%`, background: '#FF6B00' }}
             />
           </div>
         </div>
@@ -79,31 +79,31 @@ function MemberChip({
       onClick={onClick}
       className="glass glass-hover p-3 text-left transition-all duration-200 w-full"
       style={{
-        borderColor: selected ? 'var(--accent-primary)' : undefined,
-        boxShadow: selected ? '0 0 0 2px rgba(99,102,241,0.3)' : undefined,
-        background: selected ? 'rgba(99,102,241,0.1)' : undefined,
+        borderColor: selected ? '#FF6B00' : undefined,
+        background: selected ? 'rgba(255, 107, 0, 0.05)' : undefined,
+        borderLeft: selected ? '3px solid #FF6B00' : undefined,
       }}
     >
       <div className="flex items-center gap-2.5">
         <div
-          className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
-          style={{ background: 'rgba(99,102,241,0.2)', color: '#a5b4fc' }}
+          className="w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0"
+          style={{ background: 'rgba(255, 107, 0, 0.15)', color: '#FF6B00', borderRadius: '4px' }}
         >
           {member.name.charAt(0)}
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-medium truncate" style={{ color: 'var(--text-primary)' }}>
+          <p className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>
             {member.name}
           </p>
-          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+          <p className="text-xs font-mono text-neutral-400" style={{ color: 'var(--text-secondary)' }}>
             {member.chapter}
           </p>
         </div>
       </div>
       {selected && (
-        <div className="flex flex-wrap gap-1 mt-2">
+        <div className="flex flex-wrap gap-1 mt-2.5">
           {member.interests.map(i => (
-            <span key={i} className="badge badge-indigo text-xs" style={{ fontSize: '0.65rem', padding: '2px 6px' }}>
+            <span key={i} className="badge badge-indigo text-[10px]" style={{ fontSize: '0.65rem', padding: '2px 6px' }}>
               {i}
             </span>
           ))}
@@ -177,21 +177,21 @@ export default function Events({ simulated }: EventsProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-[#2A2A28] pb-4">
         <div>
           <h2 className="section-title">Event Recommendations</h2>
           <p className="section-subtitle">
-            The event-agent personalises meetup suggestions based on member interests
+            Interest-based matching matrix calculated by event-agent engines
           </p>
         </div>
-        {simulated && <span className="badge badge-amber">⚡ Simulated</span>}
+        {simulated && <span className="badge badge-amber">⚡ Sandbox</span>}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Member Selector */}
         <div className="space-y-3">
-          <h3 className="font-semibold text-sm uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-            Select a Member
+          <h3 className="font-bold font-display text-xs uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>
+            Select Member Profile
           </h3>
           <div className="space-y-2">
             {MOCK_MEMBERS.map(m => (
@@ -216,7 +216,7 @@ export default function Events({ simulated }: EventsProps) {
             style={{ opacity: !selectedMember || loading ? 0.6 : 1 }}
           >
             {loading ? (
-              <><span className="animate-spin">⟳</span> Finding events…</>
+              <>Running Match Matrix…</>
             ) : (
               <>🎯 Get Recommendations</>
             )}
@@ -224,8 +224,8 @@ export default function Events({ simulated }: EventsProps) {
 
           {error && (
             <div
-              className="p-3 rounded-xl text-sm"
-              style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#f87171' }}
+              className="p-3 rounded text-xs font-mono uppercase tracking-wider"
+              style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.2)', color: '#C41E3A' }}
             >
               {error}
             </div>
@@ -233,24 +233,24 @@ export default function Events({ simulated }: EventsProps) {
         </div>
 
         {/* Events List */}
-        <div className="lg:col-span-2 space-y-3">
+        <div className="lg:col-span-2 space-y-4">
           {loading && (
             <div className="glass flex flex-col items-center justify-center p-12 text-center gap-4">
-              <div className="w-14 h-14 rounded-full border-4 border-t-emerald-500 border-r-emerald-500/30 border-b-emerald-500/10 border-l-emerald-500/60 animate-spin" />
+              <div className="w-12 h-12 rounded border-4 border-t-[#FF6B00] border-r-transparent border-b-transparent border-l-transparent animate-spin" />
               <div>
-                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  Fetching personalised events…
+                <p className="font-bold font-display text-xs uppercase tracking-wider" style={{ color: 'var(--text-primary)' }}>
+                  Calculating Match Metrics…
                 </p>
-                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
-                  Matching interests with upcoming meetups in {selectedMember?.chapter}
+                <p className="text-xs mt-1 font-mono" style={{ color: 'var(--text-secondary)' }}>
+                  Correlating member interest parameters with region schedule for {selectedMember?.chapter}
                 </p>
               </div>
             </div>
           )}
 
           {!loading && fetched && events.length === 0 && (
-            <div className="glass p-10 text-center">
-              <p style={{ color: 'var(--text-secondary)' }}>No events found for this member.</p>
+            <div className="glass p-10 text-center font-mono text-xs">
+              <p style={{ color: 'var(--text-secondary)' }}>No matches resolved for this profile.</p>
             </div>
           )}
 
@@ -262,11 +262,11 @@ export default function Events({ simulated }: EventsProps) {
             <div className="glass flex flex-col items-center justify-center p-12 text-center gap-4 opacity-60">
               <span className="text-5xl">🗓️</span>
               <div>
-                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  Select a member and get recommendations
+                <p className="font-bold font-display text-xs uppercase tracking-wider" style={{ color: 'var(--text-primary)' }}>
+                  Select profile & execute matcher
                 </p>
-                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
-                  The event-agent will match upcoming meetups based on their interests and chapter
+                <p className="text-xs mt-1 font-mono" style={{ color: 'var(--text-secondary)' }}>
+                  Matches upcoming chapter workshops and meetups with personal interest matrices
                 </p>
               </div>
             </div>

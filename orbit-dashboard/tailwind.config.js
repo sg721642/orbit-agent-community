@@ -8,21 +8,21 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Outfit', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'Fira Code', 'monospace'],
       },
       colors: {
         bg: {
-          base:    '#080b14',
-          surface: '#0d1120',
-          card:    '#131926',
+          base:    '#111110',
+          surface: '#1C1C1A',
+          card:    '#1C1C1A',
         },
         accent: {
-          primary:   '#6366f1',
-          secondary: '#8b5cf6',
-          green:     '#10b981',
-          amber:     '#f59e0b',
-          red:       '#ef4444',
-          cyan:      '#06b6d4',
+          primary:   '#FF6B00',
+          secondary: '#F5F0E8',
+          green:     '#22C55E',
+          amber:     '#FF6B00',
+          red:       '#C41E3A',
         },
       },
       animation: {

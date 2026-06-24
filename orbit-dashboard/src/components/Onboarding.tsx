@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { PROFILE_TEMPLATES, CHAPTERS } from '../mockData';
 import { matchMember } from '../api';
 import type { OnboardingResult } from '../types';
 
 const CHAPTER_COLORS: Record<string, string> = {
-  Delhi: '#6366f1',
-  Bangalore: '#10b981',
-  Pune: '#f59e0b',
-  Hyderabad: '#06b6d4',
-  Mumbai: '#8b5cf6',
+  Delhi: '#FF6B00',
+  Bangalore: '#22C55E',
+  Pune: '#A09880',
+  Hyderabad: '#F5F0E8',
+  Mumbai: '#C41E3A',
 };
 
 const CHAPTER_EMOJIS: Record<string, string> = {
@@ -17,7 +17,6 @@ const CHAPTER_EMOJIS: Record<string, string> = {
 
 // ─── Confetti Canvas ──────────────────────────────────────────────────────
 function fireConfetti() {
-  // Simple CSS-only confetti effect using div elements
   const canvas = document.createElement('div');
   canvas.id = 'confetti-layer';
   canvas.style.cssText = `
@@ -25,7 +24,7 @@ function fireConfetti() {
   `;
   document.body.appendChild(canvas);
 
-  const colors = ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b', '#06b6d4', '#ec4899'];
+  const colors = ['#FF6B00', '#F5F0E8', '#22C55E', '#A09880', '#C41E3A'];
   for (let i = 0; i < 80; i++) {
     const piece = document.createElement('div');
     const color = colors[Math.floor(Math.random() * colors.length)];
@@ -50,7 +49,6 @@ function fireConfetti() {
     canvas.appendChild(piece);
   }
 
-  // Inject animation keyframes
   const style = document.createElement('style');
   style.textContent = `
     @keyframes confetti-fall {
@@ -68,36 +66,36 @@ function fireConfetti() {
 
 // ─── Result Card ──────────────────────────────────────────────────────────
 function ResultCard({ result }: { result: OnboardingResult }) {
-  const color = CHAPTER_COLORS[result.chapter] || '#6366f1';
+  const color = CHAPTER_COLORS[result.chapter] || '#FF6B00';
   const emoji = CHAPTER_EMOJIS[result.chapter] || '🏙️';
 
   return (
     <div
       className="glass p-6 animate-fade-in"
-      style={{ borderColor: `${color}44`, boxShadow: `0 0 30px ${color}22` }}
+      style={{ borderColor: '#2A2A28' }}
     >
       <div className="flex items-center gap-4 mb-4">
         <div
-          className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-          style={{ background: `${color}22` }}
+          className="w-14 h-14 rounded flex items-center justify-center text-3xl flex-shrink-0"
+          style={{ background: 'rgba(255,107,0,0.1)', border: '1px solid rgba(255,107,0,0.2)' }}
         >
           {emoji}
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+          <p className="text-[10px] font-bold uppercase tracking-widest font-mono" style={{ color: 'var(--text-secondary)' }}>
             Chapter Assigned
           </p>
-          <h3 className="text-2xl font-bold mt-0.5" style={{ color }}>
+          <h3 className="text-2xl font-bold font-display uppercase tracking-wider mt-0.5" style={{ color }}>
             {result.chapter}
           </h3>
         </div>
         <span className="badge badge-green ml-auto">✓ MATCHED</span>
       </div>
       <div
-        className="p-4 rounded-xl text-sm leading-relaxed"
-        style={{ background: 'rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}
+        className="p-4 rounded text-sm leading-relaxed"
+        style={{ background: '#0D0D0B', border: '1px solid #2A2A28', color: 'var(--text-secondary)' }}
       >
-        <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
+        <p className="text-[10px] font-bold uppercase tracking-widest font-mono mb-2" style={{ color: '#FF6B00' }}>
           Welcome Message
         </p>
         <p style={{ color: 'var(--text-primary)' }}>"{result.welcome_message}"</p>
@@ -183,32 +181,32 @@ export default function Onboarding({ simulated }: OnboardingProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-[#2A2A28] pb-4">
         <div>
           <h2 className="section-title">Member Onboarding</h2>
           <p className="section-subtitle">
-            The onboarding-agent matches new members to the best-fit chapter
+            Autonomous chapter sorting engine powered by onboarding-agent analysis
           </p>
         </div>
-        {simulated && <span className="badge badge-amber">⚡ Simulated</span>}
+        {simulated && <span className="badge badge-amber">⚡ Sandbox</span>}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Input Panel */}
         <div className="space-y-4">
           {/* Template Buttons */}
-          <div className="glass p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-muted)' }}>
-              Quick Templates
+          <div className="glass p-5">
+            <p className="text-[10px] font-bold uppercase tracking-widest font-mono mb-3" style={{ color: 'var(--text-secondary)' }}>
+              Select Template Profile
             </p>
             <div className="flex flex-wrap gap-2">
               {PROFILE_TEMPLATES.map(t => (
                 <button
                   key={t.label}
                   onClick={() => applyTemplate(t.text)}
-                  className="btn btn-ghost btn-sm"
+                  className="btn btn-ghost btn-sm text-xs font-mono lowercase"
                 >
-                  {t.label}
+                  {`[${t.label.replace(/\s+/g, '_').toLowerCase()}]`}
                 </button>
               ))}
             </div>
@@ -216,8 +214,8 @@ export default function Onboarding({ simulated }: OnboardingProps) {
 
           {/* Text Area */}
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
-              Member Bio / Interests
+            <label className="block text-xs font-bold uppercase tracking-wider mb-2 font-mono" style={{ color: 'var(--text-secondary)' }}>
+              Member Bio / Credentials Profile
             </label>
             <textarea
               ref={textareaRef}
@@ -227,8 +225,8 @@ export default function Onboarding({ simulated }: OnboardingProps) {
               onChange={e => setProfile(e.target.value)}
               rows={6}
             />
-            <p className="text-xs mt-1.5" style={{ color: 'var(--text-muted)' }}>
-              {profile.length} characters — aim for at least 50 for best results
+            <p className="text-[10px] font-mono mt-1.5" style={{ color: 'var(--text-muted)' }}>
+              {profile.length} characters — recommended minimum 50 characters
             </p>
           </div>
 
@@ -240,18 +238,16 @@ export default function Onboarding({ simulated }: OnboardingProps) {
             style={{ opacity: loading || !profile.trim() ? 0.6 : 1, cursor: loading || !profile.trim() ? 'not-allowed' : 'pointer' }}
           >
             {loading ? (
-              <>
-                <span className="animate-spin">⟳</span> Matching to chapter…
-              </>
+              <>Running Match Matrix…</>
             ) : (
-              <>🔍 Find My Chapter</>
+              <>🔍 Sort Member Profile</>
             )}
           </button>
 
           {error && (
             <div
-              className="p-4 rounded-xl text-sm"
-              style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#f87171' }}
+              className="p-4 rounded text-xs font-mono uppercase tracking-wider"
+              style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.2)', color: '#C41E3A' }}
             >
               ⚠️ {error}
             </div>
@@ -265,36 +261,36 @@ export default function Onboarding({ simulated }: OnboardingProps) {
           ) : loading ? (
             <div className="glass flex flex-col items-center justify-center p-10 text-center h-full gap-4">
               <div
-                className="w-16 h-16 rounded-full border-4 border-t-indigo-500 border-r-indigo-500/30 border-b-indigo-500/10 border-l-indigo-500/60 animate-spin"
+                className="w-12 h-12 rounded border-4 border-t-[#FF6B00] border-r-transparent border-b-transparent border-l-transparent animate-spin"
               />
               <div>
-                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>Analyzing profile…</p>
-                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
-                  The onboarding-agent is finding your best chapter match
+                <p className="font-bold font-display text-xs uppercase tracking-wider" style={{ color: 'var(--text-primary)' }}>Analyzing bio profile…</p>
+                <p className="text-xs mt-1 font-mono" style={{ color: 'var(--text-secondary)' }}>
+                  The onboarding-agent is calculating matching matrices
                 </p>
               </div>
             </div>
           ) : (
-            <div className="glass flex flex-col items-center justify-center p-10 text-center h-full gap-4 opacity-60">
-              <span className="text-5xl">🎯</span>
+            <div className="glass flex flex-col items-center justify-center p-10 text-center h-full gap-4">
+              <span className="text-5xl opacity-40">🎯</span>
               <div>
-                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  Paste your bio or pick a template
+                <p className="font-bold font-display text-xs uppercase tracking-wider" style={{ color: 'var(--text-primary)' }}>
+                  Initialize Member Sort
                 </p>
-                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
-                  The AI will assign you to one of 5 city chapters
+                <p className="text-xs mt-1 font-mono" style={{ color: 'var(--text-secondary)' }}>
+                  Submit profile bio details above to match into active regions
                 </p>
               </div>
               {/* Chapter Preview */}
-              <div className="w-full grid grid-cols-5 gap-2 mt-2">
+              <div className="w-full grid grid-cols-5 gap-2 mt-4 font-mono">
                 {CHAPTERS.map(ch => (
                   <div
                     key={ch}
-                    className="flex flex-col items-center gap-1 p-2 rounded-xl"
-                    style={{ background: `${CHAPTER_COLORS[ch]}11` }}
+                    className="flex flex-col items-center gap-1 p-2.5 rounded border border-[#2A2A28]"
+                    style={{ background: '#0D0D0B' }}
                   >
                     <span className="text-lg">{CHAPTER_EMOJIS[ch]}</span>
-                    <span className="text-xs" style={{ color: CHAPTER_COLORS[ch] }}>{ch}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: CHAPTER_COLORS[ch] }}>{ch}</span>
                   </div>
                 ))}
               </div>
