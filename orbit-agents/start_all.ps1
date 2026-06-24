@@ -24,6 +24,13 @@ if (-not (Test-Path ".env")) {
     exit 1
 }
 
+# Start Mock Control Plane first
+Write-Host "  Starting mock-control-plane on port 8080..." -ForegroundColor White
+Start-Process powershell -ArgumentList "-NoExit", "-Command",
+    "Write-Host '=== mock-control-plane ===' -ForegroundColor White; python mock_control_plane.py" `
+    -WorkingDirectory $scriptDir
+Start-Sleep -Seconds 3
+
 # Start each agent in a separate window
 $agents = @(
     @{ Name="onboarding-agent"; File="agents\onboarding_agent.py"; Port=8001; Color="Green" },

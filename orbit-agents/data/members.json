@@ -1,0 +1,127 @@
+[
+  {
+    "name": "Aarav Sharma",
+    "bio": "Senior backend engineer at a fintech startup in Bangalore. Love Golang, distributed systems, and Kafka. Speaker at local tech meetups.",
+    "chapter": "Bangalore"
+  },
+  {
+    "name": "Priya Nair",
+    "bio": "ML researcher at IIT Hyderabad. Focused on NLP, transformer architectures, and RAG systems. Open source contributor.",
+    "chapter": "Hyderabad"
+  },
+  {
+    "name": "Rohit Verma",
+    "bio": "Full-stack developer in Pune. React, Node.js, and PostgreSQL. Passionate about developer experience and tooling.",
+    "chapter": "Pune"
+  },
+  {
+    "name": "Ananya Singh",
+    "bio": "Product manager at a SaaS company in Delhi. Into product strategy, user research, and AI product features.",
+    "chapter": "Delhi"
+  },
+  {
+    "name": "Kiran Reddy",
+    "bio": "DevOps engineer at a cloud consulting firm in Hyderabad. Kubernetes, Terraform, AWS. CNCF community member.",
+    "chapter": "Hyderabad"
+  },
+  {
+    "name": "Sneha Patel",
+    "bio": "iOS developer and indie app maker based in Mumbai. Swift, SwiftUI, Core ML. Founder of a small startup.",
+    "chapter": "Mumbai"
+  },
+  {
+    "name": "Vikram Gupta",
+    "bio": "Data engineer at a media company in Delhi. Apache Spark, dbt, Snowflake. Building real-time analytics pipelines.",
+    "chapter": "Delhi"
+  },
+  {
+    "name": "Divya Krishnan",
+    "bio": "Security researcher focused on cloud infrastructure. AWS IAM, zero-trust, penetration testing. Based in Bangalore.",
+    "chapter": "Bangalore"
+  },
+  {
+    "name": "Rahul Mehta",
+    "bio": "Rust developer and WebAssembly enthusiast in Pune. Building high-performance web APIs and edge computing solutions.",
+    "chapter": "Pune"
+  },
+  {
+    "name": "Meera Iyer",
+    "bio": "Frontend architect at a product company in Mumbai. Expert in React, Next.js, and design systems. Accessibility advocate.",
+    "chapter": "Mumbai"
+  },
+  {
+    "name": "Arjun Desai",
+    "bio": "AI/ML engineer specializing in computer vision and robotics. Working on autonomous vehicle perception in Hyderabad.",
+    "chapter": "Hyderabad"
+  },
+  {
+    "name": "Lakshmi Rao",
+    "bio": "Platform engineer building developer platforms at scale in Bangalore. Internal developer portals, Backstage, and golden paths.",
+    "chapter": "Bangalore"
+  },
+  {
+    "name": "Nikhil Joshi",
+    "bio": "Blockchain developer and DeFi protocol researcher. Solidity, Ethereum, and Layer 2 solutions. Based in Mumbai.",
+    "chapter": "Mumbai"
+  },
+  {
+    "name": "Pooja Agarwal",
+    "bio": "Site reliability engineer at a large e-commerce company in Delhi. Observability, chaos engineering, and incident management.",
+    "chapter": "Delhi"
+  },
+  {
+    "name": "Siddharth Kumar",
+    "bio": "Python developer and FastAPI enthusiast in Pune. Building LLM applications and agent frameworks for enterprise clients.",
+    "chapter": "Pune"
+  },
+  {
+    "name": "Kavya Menon",
+    "bio": "AI product designer working at the intersection of UX and machine learning. Based in Bangalore. Loves design thinking workshops.",
+    "chapter": "Bangalore"
+  },
+  {
+    "name": "Amitabh Pandey",
+    "bio": "Data scientist at a healthcare company in Delhi. Clinical NLP, FHIR, and AI-assisted diagnostics. Published researcher.",
+    "chapter": "Delhi"
+  },
+  {
+    "name": "Trisha Shah",
+    "bio": "Startup founder building a B2B SaaS product in Mumbai. Technical background in Python and infrastructure. Fundraising stage.",
+    "chapter": "Mumbai"
+  },
+  {
+    "name": "Venkat Subramaniam",
+    "bio": "Embedded systems engineer and IoT enthusiast in Hyderabad. C++, FreeRTOS, MQTT. Working on smart agriculture sensors.",
+    "chapter": "Hyderabad"
+  },
+  {
+    "name": "Ishaan Malhotra",
+    "bio": "Cloud architect at a consulting firm in Pune. Multi-cloud strategy, FinOps, and green computing. AWS and GCP certified.",
+    "chapter": "Pune"
+  },
+  {
+    "name": "Nisha Bhat",
+    "bio": "Open source maintainer and community manager in Bangalore. Python ecosystem, documentation, and developer advocacy.",
+    "chapter": "Bangalore"
+  },
+  {
+    "name": "Rajesh Pillai",
+    "bio": "Mobile game developer in Mumbai. Unity, C#, and real-time multiplayer systems. Published 3 games on the Play Store.",
+    "chapter": "Mumbai"
+  },
+  {
+    "name": "Shruti Saxena",
+    "bio": "Research engineer at an AI lab in Delhi working on large language models, RLHF, and model alignment. PhD student.",
+    "chapter": "Delhi"
+  },
+  {
+    "name": "Aditya Kulkarni",
+    "bio": "Infrastructure engineer at a unicorn startup in Pune. Kubernetes operators, GitOps, and platform automation.",
+    "chapter": "Pune"
+  },
+  {
+    "name": "Deepa Natarajan",
+    "bio": "Quantum computing researcher and educator in Hyderabad. Qiskit, quantum algorithms, and bridging theory to industry.",
+    "chapter": "Hyderabad"
+  }
+]

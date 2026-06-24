@@ -1,0 +1,50 @@
+[
+  {
+    "text": "Just finished implementing a distributed tracing system with OpenTelemetry in our Go microservices. Happy to share a write-up if anyone's interested!",
+    "expected": "allow"
+  },
+  {
+    "text": "Looking for study partners for the CKA exam. Anyone preparing for Kubernetes certification in Bangalore? Let's form a study group!",
+    "expected": "allow"
+  },
+  {
+    "text": "Hot take: Rust is overkill for most web APIs. Discuss. (I say this as a Rust developer \ud83d\ude05)",
+    "expected": "allow"
+  },
+  {
+    "text": "We're hosting an open source sprint next month in Pune \u2014 all skill levels welcome! PRs merged, mentors available. Sign up link in comments.",
+    "expected": "allow"
+  },
+  {
+    "text": "Interesting paper on speculative decoding for LLM inference just dropped. Reduces latency by 3x. Has anyone tried this in production?",
+    "expected": "allow"
+  },
+  {
+    "text": "Check out my new course on Python! Only $29 today (50% off). Use code ORBIT for extra savings. Limited time only. https://mycourse.io",
+    "expected": "flag"
+  },
+  {
+    "text": "Our recruiting platform helps tech companies hire 10x faster. DM me if your team is hiring. We work with startups and enterprises.",
+    "expected": "flag"
+  },
+  {
+    "text": "Anyone else feel like the FAANG interview process is broken? I failed 3 Google loops despite having 8 years of experience. Feeling defeated.",
+    "expected": "allow"
+  },
+  {
+    "text": "Unpopular opinion: AI tools are making junior devs lazy. Nobody learns fundamentals anymore. We're creating a generation of copy-paste coders.",
+    "expected": "flag"
+  },
+  {
+    "text": "FREE webinar tomorrow: How I grew my LinkedIn to 50k followers as a developer. Secrets revealed! Register now: bit.ly/abc123",
+    "expected": "flag"
+  },
+  {
+    "text": "MAKE MONEY FAST! Join our crypto trading bot that earns $500/day guaranteed! No experience needed. DM NOW before slots fill up! \ud83d\ude80\ud83d\udcb0",
+    "expected": "remove"
+  },
+  {
+    "text": "Click here to claim your free iPhone 16! Limited offer for ORBIT members only. https://totally-not-phishing.com/free-iphone",
+    "expected": "remove"
+  }
+]
