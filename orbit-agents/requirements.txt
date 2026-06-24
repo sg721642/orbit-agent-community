@@ -1,0 +1,7 @@
+agentfield[server]
+python-dotenv
+pydantic>=2.0
+faker
+litellm
+google-generativeai
+httpx
