@@ -5,3 +5,5 @@ faker
 litellm
 google-generativeai
 httpx
+fastapi
+uvicorn[standard]
